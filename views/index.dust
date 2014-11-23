@@ -1,0 +1,32 @@
+{>layout/}
+{<content}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Hello, teachers!</h1>
+        <p>Some text about how awesome GEA is and stuff.</p>
+        <p><a class="btn btn-primary btn-lg" href="/register" role="button">Register &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-5">
+          <h2>Teacher Supply Warehouse</h2>
+          <p>Something about how awesome teachers are and GEA's mission. The stuff on <a href="http://tswteachers.gcsnc.com/">this page</a> seems important, too. We could integrate with their existing user system if we're feeling ambitious.</p>
+          <p><a class="btn btn-default" href="/inventory" role="button">Get Stuff &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Volunteer</h2>
+          <p>Something about how GEA needs volunteers to help deliver stuff.</p>
+          <p><a class="btn btn-default" href="/volunteers" role="button">Volunteer &raquo;</a></p>
+        </div>
+        <div class="col-md-3">
+          <h2>Donate</h2>
+          <p>Check out <a href="/wishlists">our wishlist</a> for donation ideas.</p>
+          <p>Something about how GEO relies on donations.</p>
+          <p><a class="btn btn-default" href="http://www.guilfordeducationalliance.org/support/index.php" role="button">Donate &raquo;</a></p>
+       </div>
+      </div>
+{/content}

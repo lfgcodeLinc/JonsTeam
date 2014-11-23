@@ -1,0 +1,63 @@
+{>layout/}
+{<content}
+  <div class="container">
+  <h1>Inventory</h1>
+  <table class="table table-striped">
+    <tr>
+      <th>id</th>
+      <th>item</th>
+      <th>description</th>
+      <th>price</th>
+      <th>available</th>
+      <th>quantity</th>
+    </tr>
+    {#items}
+    <tr class="item">
+      <td>{id}</td>
+      <td>{name}</td>
+      <td>{description}</td>
+      <td>{price}</td>
+      <td>{quantity}</td>
+      <td contenteditable="true" class="form-control">0</td>
+    </tr>
+    {/items}
+  </table>
+  <div id="error">
+  </div>
+  <form id="checkout" action="/checkout" method="POST">
+    <input type="submit" value="Checkout" class="btn">
+  </form>
+</div>
+<script type="text/javascript">
+window.onload = function () {
+  $("#checkout").submit(function (event) {
+    event.preventDefault();
+    var items = $(".item").map(function (i, item) {
+      console.log(item);
+      return {
+        id: parseInt(item.children[0].innerHTML),
+        quantity: parseInt(item.children[5].innerHTML)
+      };
+    }).toArray().filter(function (item) {
+      return item.quantity > 0;
+    });
+
+    console.log(items);
+
+    $.post('/checkout', {items: items})
+    .done(function (data) {
+       console.log(data);
+       if (data.error) {
+        $('#error')[0].innerHTML = '<div class="alert alert-danger alert-dismissable"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + data.error + ' </div>';
+       }
+
+      if (data.id) {
+         window.document.location = '/orders/' + data.id;
+      }
+    });
+
+    return false;
+  });
+};
+</script>
+{/content}

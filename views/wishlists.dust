@@ -1,0 +1,19 @@
+{>layout/}
+{<content}
+<div class="container">
+	<h1>Wishlist</h1> 
+	<div class="row">
+	</div>
+	<br>
+	<div class="row">
+	<table class="table table-striped">
+		{#wishlists}
+		<tr>
+			<td>{text}</td>
+		</tr>
+		{/wishlists}
+	</table>
+	{?teacher}<a href="/wishlist" class="btn btn-success">Add something</a>{/teacher}
+	</div>
+</div>
+{/content}

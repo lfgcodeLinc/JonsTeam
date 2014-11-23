@@ -1,0 +1,78 @@
+{>layout/}
+{<content}
+<div class="container">
+  <div class="row">
+		<h1>Order {id}</h1>
+		<hr>
+		<p>Created {created}</p>
+		<table class="table">
+		<tr>
+			<th>name</th>
+			<th>description</th>
+			<th>price</th>
+			<th>quantity</th>
+			<th>total</th>
+		</tr>
+		{#items}
+		<tr>
+			<td>{name}</td>
+			<td>{description}</td>
+			<td>{price}</td>
+			<td>{quantity}</td>
+			<td>{total}</td>
+		</tr>
+		{/items}
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>{totalprice} points</td>
+		</tr>
+		</table>
+    <form class="form-horizontal" role="form" action="/orders/{id}" method="post">
+			<input type="hidden" name="id" value="{id}">
+      <div class="form-group">
+			{?delivery_id}
+			<label class="control-label" for="delivery">Delivery</label>
+			<div name="delivery" class="input-group">
+			<a href="/deliveries/{delivery_id}">Delivery</a>
+			<input type="hidden" name="delivery_id" value="{delivery_id}">
+			<div class="checkbox">
+				<input type="checkbox" name="delivery" {?delivery_id}checked{/delivery_id}> I want this delivered
+      </div>
+			</div>
+			{:else}
+			<label class="control-label" for="delivery">Delivery</label>
+			<div class="checkbox">
+				<input type="checkbox" name="delivery" {?delivery_id}checked{/delivery_id}> I want this delivered
+      </div>
+			<textarea rows="4" name="deliverytext" placeholder="Details">{deliverytext}</textarea>
+			{/delivery_id}
+      </div>
+      <div class="form-group">
+          <label for="pickup">Pickup</label>
+					<div class="checkbox">
+						<input type="checkbox" name="pickup" {?pickup}checked{/pickup}> I want to pick this up
+					</div>
+					<input type="date" name="pickuptime"{?pickup} value="{pickup}"{/pickup}>
+      </div>
+      <div class="form-group">
+          <label for="completed">Completed</label>
+          <div class="input-group">
+            <select class="form-control" name="completed">
+						{?completed}
+						<option value="true" selected="selected">Yes</option>
+						<option value="false">No</option>
+						{:else}
+						<option value="true">Yes</option>
+						<option value="false" selected="selected">No</option>
+						{/completed}
+            </select>
+          </div>
+      </div>
+      <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
+    </form>
+  </div>
+</div>
+{/content}

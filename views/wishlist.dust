@@ -1,0 +1,15 @@
+{>layout/}
+{<content}
+<div class="container">
+  <div class="row">
+		<h1>Wishlist</h1>
+    <form class="form-horizontal" role="form" action="/wishlist" method="post">
+      <div class="form-group">
+          <label for="pickup">Request</label><br>
+					<input type="text" name="text">
+      </div>
+			<br>
+      <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info">
+    </form>
+</div>
+{/content}
