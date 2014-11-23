@@ -79,7 +79,7 @@ exports.register = function (req, res) {
       return res.redirect('/');
     }
 
-    var query = 'SELECT * FROM schools';
+    var query = 'SELECT * FROM schools ORDER BY id ASC';
     client.query(query, function (err, result) {
       if (err) {
         client.end();

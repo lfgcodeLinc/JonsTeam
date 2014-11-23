@@ -90,7 +90,7 @@ function getOrders(userid, cb) {
       return cb('Unknown error. Contact admin.');
     }
 
-    var query = "SELECT orders.id, created, completed, delivery_id, to_char(pickup, 'YYYY-MM-DD') AS pickup FROM orders LEFT JOIN deliveries ON delivery_id = deliveries.id WHERE user_id = $1";
+    var query = "SELECT orders.id, created, completed, delivery_id, to_char(pickup, 'YYYY-MM-DD') AS pickup FROM orders LEFT JOIN deliveries ON delivery_id = deliveries.id WHERE user_id = $1 ORDER BY completed ASC, created DESC";
     client.query(query, [userid], function (err, result) {
       client.end();
       if (err) return cb(err);

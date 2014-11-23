@@ -27,7 +27,7 @@
 			<td></td>
 			<td></td>
 			<td></td>
-			<td>{totalprice}</td>
+			<td>{totalprice} points</td>
 		</tr>
 		</table>
     <form class="form-horizontal" role="form" action="/orders/{id}" method="post">
