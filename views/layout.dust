@@ -46,7 +46,7 @@
           <form class="navbar-form navbar-right no-pad-right" action="/logout" method="GET">
             <button type="submit" class="btn btn-danger btn-sm">Log out</button>&nbsp;
           </form>
-          <span class="navbar-text navbar-right">Logged in as <strong>{user}</strong></span>
+          <span class="navbar-text navbar-right">Balance: <strong>{balance}</strong> points | <strong>{user}</strong></span>
           {:else}
           <form class="navbar-form navbar-right no-pad" role="form" action="/login" method="POST">
             <div class="form-group">
