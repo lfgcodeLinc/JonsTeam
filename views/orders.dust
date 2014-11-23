@@ -1,0 +1,29 @@
+{>layout/}
+{<content}
+  <div class="container">
+  <h1>Orders</h1>
+  <table class="table table-striped">
+    <tr>
+      <th>id</th>
+      <th>created</th>
+      <th>delivery</th>
+      <th>pickup</th>
+      <th>completed</th>
+    </tr>
+    {#orders}
+    <tr class="item hand" href="/orders/{id}">
+      <td><a href="/orders/{id}">{id}</a></td>
+      <td>{created}</td>
+      <td>{?delivery_id}<a href="/deliveries/{delivery_id}">Yes{:else}No{/delivery_id}</td>
+      <td>{?pickup}{pickup}{:else}No{/pickup}</td>
+      <td>{?completed}Yes{:else}No{/completed}</td>
+    </tr>
+    {/orders}
+  </table>
+</div>
+<script type="text/javascript">
+window.onload = function () {
+	$('.item').click(function (e) { window.document.location = $(this).attr("href"); });
+};
+</script>
+{/content}

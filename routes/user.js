@@ -34,7 +34,7 @@ exports.login = function (req, res) {
       }
 
       // attempt to log in
-      query = 'SELECT teacher, pass = crypt($1, pass) AS check FROM users WHERE id = $2';
+      query = 'SELECT teacher, balance, pass = crypt($1, pass) AS check FROM users WHERE id = $2';
       client.query(query, [pass, id], function (err, result) {
         client.end();
         if (err) {
@@ -48,7 +48,7 @@ exports.login = function (req, res) {
           req.session.email = email;
           req.session.teacher = result.rows[0].teacher;
           if (req.session.teacher) {
-            req.session.cart = [];
+            req.session.balance =result.rows[0].balance;
           }
         } else {
           req.session.error = 'Login failed.';

@@ -43,7 +43,7 @@ create table orders (
   id serial primary key,
   user_id int references users(id),
   created timestamp default now(),
-  completed boolean,
+  completed boolean default false,
   delivery_id int references deliveries(id),
   pickup timestamp
 );
@@ -51,5 +51,6 @@ create table orders (
 create table order_items (
   id serial primary key,
   order_id int references orders(id),
-  item_id int references items(id)
+  item_id int references items(id),
+  quantity int
 );
