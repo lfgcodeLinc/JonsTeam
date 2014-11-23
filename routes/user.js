@@ -34,7 +34,7 @@ exports.login = function (req, res) {
       }
 
       // attempt to log in
-      query = 'SELECT pass = crypt($1, pass) AS check FROM users WHERE id = $2';
+      query = 'SELECT teacher, pass = crypt($1, pass) AS check FROM users WHERE id = $2';
       client.query(query, [pass, id], function (err, result) {
         client.end();
         if (err) {
@@ -46,6 +46,10 @@ exports.login = function (req, res) {
         if (result.rows[0].check) {
           req.session.userid = id;
           req.session.email = email;
+          req.session.teacher = result.rows[0].teacher;
+          if (req.session.teacher) {
+            req.session.cart = [];
+          }
         } else {
           req.session.error = 'Login failed.';
         }
@@ -60,6 +64,7 @@ exports.login = function (req, res) {
 exports.logout = function (req, res) {
   delete req.session.userid;
   delete req.session.email;
+  delete req.session.teacher;
 
   res.redirect('/');
 };
@@ -96,6 +101,7 @@ exports.create = function (req, res) {
   var pass = req.body.pass;
   var school = req.body.school || 0;
   var phone = req.body.phone || null;
+  var teacher = req.body.teacher || false;
 
   if (!(email && pass)) return res.redirect('/');
   client = new pg.Client(creds);
@@ -108,8 +114,8 @@ exports.create = function (req, res) {
     }
 
     // create new user
-    var query = 'INSERT INTO users (name, email, pass, phone, balance, school_id) VALUES ($1, $2, crypt($3, gen_salt($4)), $5, $6, $7) RETURNING id';
-    client.query(query, [name, email, pass, 'md5', phone, 25, school], function (err, result) {
+    var query = 'INSERT INTO users (name, email, pass, phone, balance, school_id, teacher) VALUES ($1, $2, crypt($3, gen_salt($4)), $5, $6, $7, $8) RETURNING id';
+    client.query(query, [name, email, pass, 'md5', phone, 25, school, teacher], function (err, result) {
       client.end();
       if (err) {
         console.log(err);

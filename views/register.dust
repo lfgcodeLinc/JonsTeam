@@ -41,6 +41,11 @@
             </select>
           </div>
       </div>
+     <div class="checkbox">
+        <label>
+          <input type="checkbox" name="teacher"> I'm a teacher
+        </label>
+      </div>
       <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
     </form>
   </div>

@@ -30,8 +30,12 @@ app.use(express.static('public'));
 app.use(express.session({secret: 'fhsdlafdsjflkadsjlkfjlk'}));
 app.use(function (req, res, next) {
   res.locals.user = req.session.email;
+  res.locals.teacher = req.session.teacher;
+  res.locals.cart = req.session.cart;
   res.locals.success = req.session.success;
   res.locals.error = req.session.error;
+
+  console.log(req.session);
 
   next();
 
@@ -45,9 +49,39 @@ app.get('/', function (req, res) {
 });
 
 app.get('/inventory', function (req, res) {
-    /*
-       select * from inventory join items on inventory.item_id = items.id;
-       */
+  res.locals.inventory = true;
+
+  getInventory(function (err, items) {
+    res.render('inventory.dust', {
+      items: items
+    });
+  });
+});
+
+app.post('/inventory', function (req, res) {
+  res.locals.inventory = true;
+
+  var id = req.body.id;
+  var quantity = req.body.quantity;
+
+  req.session.cart.push({
+    id: id,
+    quantity: quantity
+  });
+  getInventory(function (err, items) {
+    res.render('inventory.dust', {
+      items: items
+    });
+  });
+});
+
+app.post('/checkout', function (req, res) {
+  console.log(req.body);
+  res.json({hello: 'world'});
+});
+app.get('/orders', function (req, res) {
+  res.locals.orders = true;
+  res.render('orders.dust');
 });
 app.get('/donate', function (req, res) {
 });
@@ -63,3 +97,26 @@ var server = app.listen(port, function () {
   var host = server.address().address;
   console.log('Example app listening at http://%s:%s', host, port);
 });
+
+function getInventory(cb) {
+  client = new pg.Client(creds);
+  client.connect(function (err) {
+    if (err) {
+      client.end();
+      console.log(err);
+      cb('Unknown error. Contact admin.');
+    }
+
+    // create new user
+    var query = 'SELECT inventory.id, name, description, price, quantity FROM inventory JOIN items ON inventory.item_id = items.id';
+    client.query(query, function (err, result) {
+      client.end();
+      if (err) {
+        console.log(err);
+        return cb('Unknown error. Contact admin.');
+      }
+
+      cb(null, result.rows);
+    });
+  });
+}

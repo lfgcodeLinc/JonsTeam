@@ -8,9 +8,10 @@ create table users (
   id serial primary key,
   name text,
   pass text,
-  email text,
+  email text unique,
   phone text,
   balance float4,
+  teacher boolean,
   school_id int references schools(id)
 );
 
@@ -41,7 +42,7 @@ create table deliveries (
 create table orders (
   id serial primary key,
   user_id int references users(id),
-  created timestamp,
+  created timestamp default now(),
   completed boolean,
   delivery_id int references deliveries(id),
   pickup timestamp

@@ -1,0 +1,54 @@
+{>layout/}
+{<content}
+  <h1>Inventory</h1>
+  <div class="container">
+  <table class="table table-striped">
+    <tr>
+      <th>id</th>
+      <th>item</th>
+      <th>description</th>
+      <th>price</th>
+      <th>quantity</th>
+      <th>add</th>
+    </tr>
+    {#items}
+    <tr class="item">
+      <td>{id}</td>
+      <td>{name}</td>
+      <td>{description}</td>
+      <td>{price}</td>
+      <td>{quantity}</td>
+      <td contenteditable="true" class="form-control">0</td>
+    </tr>
+    {/items}
+  </table>
+  <form id="checkout" action="/checkout" method="POST">
+    <input type="submit" value="Checkout" class="btn">
+  </form>
+</div>
+<script type="text/javascript">
+window.onload = function () {
+  $("#checkout").submit(function (event) {
+    event.preventDefault();
+    var items = $(".item").map(function (i, item) {
+      console.log(item);
+      return {
+        id: parseInt(item.children[0].innerHTML),
+        quantity: parseInt(item.children[5].innerHTML)
+      };
+    }).toArray().filter(function (item) {
+      return item.quantity > 0;
+    });
+
+    console.log(items);
+
+    $.post('/checkout', {items: items})
+    .done(function (data) {
+       console.log(data);
+    });
+
+    return false;
+  });
+};
+</script>
+{/content}

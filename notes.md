@@ -13,6 +13,8 @@ shut their doors at 5 -- doesn't work for high school teachers
 
 Need an ordering system so teachers can tell GEA what they need so it can be delivered or picked up
 
+wishlist
+
 think about different user groups:
 * teachers
 * GEA
