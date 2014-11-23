@@ -24,6 +24,7 @@
         </div>
         <div class="col-md-3">
           <h2>Donate</h2>
+          <p>Check out <a href="/wishlists">our wishlist</a> for donation ideas.</p>
           <p>Something about how GEO relies on donations.</p>
           <p><a class="btn btn-default" href="http://www.guilfordeducationalliance.org/support/index.php" role="button">Donate &raquo;</a></p>
        </div>
