@@ -4,6 +4,7 @@ var cons = require('consolidate');
 var pg = require('pg');
 
 var user = require('./routes/user');
+var volunteers = require('./routes/volunteers');
 var inventory = require('./routes/inventory');
 var orders = require('./routes/orders');
 var port = process.env.PORT || 3000;
@@ -48,16 +49,21 @@ app.use(app.router);
 app.get('/', function (req, res) {
   res.render('index.dust');
 });
-
-app.post('/volunteer', function (req, res) {
-  // insert into volunteers (user_id, availability) values (?, ?);
+app.get('/volunteer', function (req, res) {
+  res.render('volunteer.dust');
 });
+app.get('/volunteers', volunteers.index);
+app.get('/volunteer/:id', volunteers.get);
+app.post('/volunteer', volunteers.create);
+app.delete('/volunteer/:id', volunteers.delete);
 
 app.get('/inventory', inventory.index);
 app.post('/checkout', inventory.checkout);
+
 app.get('/orders', orders.index);
 app.get('/orders/:id', orders.get);
 app.post('/orders/:id', orders.create);
+
 app.post('/login', user.login);
 app.get('/logout', user.logout);
 app.post('/register', user.create);

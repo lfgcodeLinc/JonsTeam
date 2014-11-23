@@ -20,7 +20,7 @@
         <div class="col-md-4">
           <h2>Volunteer</h2>
           <p>Something about how GEA needs volunteers to help deliver stuff.</p>
-          <p><a class="btn btn-default" href="/volunteer" role="button">Volunteer &raquo;</a></p>
+          <p><a class="btn btn-default" href="/volunteers" role="button">Volunteer &raquo;</a></p>
         </div>
         <div class="col-md-3">
           <h2>Donate</h2>

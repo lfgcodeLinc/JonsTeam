@@ -57,17 +57,7 @@ exports.create = function (req, res) {
   var completed = req.body.completed || false;
 
   var done = function (err) {
-    var query = "SELECT orders.id, orders.created, orders.delivery_id, orders.completed, deliveries.location, to_char(pickup, 'YYYY-MM-DD') AS pickup FROM orders LEFT JOIN deliveries ON orders.delivery_id = deliveries.id WHERE orders.id = $1";
-    client = new pg.Client(creds);
-    client.connect();
-    client.query(query, [req.params.id], function (err, result) {
-      client.end();
-      var order = result.rows[0];
-      if (order.pickup === true) {
-        order.pickup = false;
-      }
-      res.render('order.dust', order);
-    });
+		res.redirect('/orders/' + id);
   };
 
   if (pickup) {
@@ -79,12 +69,15 @@ exports.create = function (req, res) {
   client.connect();
   client.query(query, [pickuptime, delivery_id, completed, id], function (err, result) {
     client.end();
-    if (delivered) {
-      createDelivery(id, deliverytext, done.bind(this));
-      return;
-    }
     if (err) return console.log(err);
-    done();
+    if (delivered) {
+      createDelivery(id, deliverytext, function () {
+				done();
+			});
+      return;
+    } else {
+			done();
+		}
   });
 };
 

@@ -1,0 +1,36 @@
+{>layout/}
+{<content}
+<div class="container">
+	<h1>History</h1> 
+	<div class="row">
+	</div>
+	<br>
+	<div class="row">
+	<table class="table table-striped">
+		<tr>
+			<th>date</th>
+			<th>notes</th>
+			<th></th>
+		</tr>
+		{#volunteers}
+		<tr class="item hand" href="/volunteer/{id}">
+			<td>{date}</td>
+			<td>{availability}</td>
+			<td class="right">
+				<form action="/volunteer/{id}" method="POST">
+					<input type="hidden" name="_method" value="DELETE">
+					<input type="submit" name="submit" value="Delete" class="btn btn-danger">
+				</form>
+			</td>
+		</tr>
+		{/volunteers}
+	</table>
+	<a href="/volunteer" class="btn btn-success">Sign up</a>
+	</div>
+</div>
+<script type="text/javascript">
+window.onload = function () {
+	$('.item').click(function (e) { window.document.location = $(this).attr("href"); });
+};
+</script>
+{/content}

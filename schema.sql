@@ -18,6 +18,7 @@ create table users (
 create table volunteers (
   id serial primary key,
   user_id int references users(id),
+  date date,
   availability text
 );
 
