@@ -5,6 +5,7 @@ var pg = require('pg');
 
 var user = require('./routes/user');
 var volunteers = require('./routes/volunteers');
+var wishlists = require('./routes/wishlists');
 var inventory = require('./routes/inventory');
 var orders = require('./routes/orders');
 var port = process.env.PORT || 3000;
@@ -68,6 +69,10 @@ app.post('/login', user.login);
 app.get('/logout', user.logout);
 app.post('/register', user.create);
 app.get('/register', user.register);
+
+app.get('/wishlists', wishlists.index);
+app.get('/wishlist', wishlists.get);
+app.post('/wishlist', wishlists.create);
 
 var server = app.listen(port, function () {
   console.log('Example app listening at http://%s:%s', host, port);

@@ -43,6 +43,7 @@
             {?teacher}
             <li{?inventory} class="active"{/inventory}><a href="/inventory">Inventory</a></li>
             <li{?orders} class="active"{/orders}><a href="/orders">My Orders</a></li>
+            <li{?wishlist} class="active"{/wishlist}><a href="/wishlists">Wishlist</a></li>
             {/teacher}
           </ul>
 					{?user}

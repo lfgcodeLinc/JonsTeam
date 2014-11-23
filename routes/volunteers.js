@@ -13,7 +13,7 @@ exports.index = function (req, res) {
   client.query(query, [userid], function (err, result) {
     client.end();
     if (err) {
-      console.log(error);
+      console.log(err);
       req.session.error = err;
       return res.redirect('/');
     }
@@ -32,7 +32,7 @@ exports.get = function (req, res) {
   client.query(query, [userid, id], function (err, result) {
     client.end();
     if (err) {
-      console.log(error);
+      console.log(err);
       req.session.error = err;
       return res.redirect('/volunteer');
     }
@@ -83,7 +83,7 @@ exports.create = function (req, res) {
     client.query(query, params, function (err, result) {
       if (err) {
         client.end();
-        console.log(error);
+        console.log(err);
         req.session.error = err;
         return res.redirect('/volunteer');
       }
@@ -92,7 +92,7 @@ exports.create = function (req, res) {
       client.query(query, [userid], function (err, result) {
           client.end();
         if (err) {
-          console.log(error);
+          console.log(err);
           req.session.error = err;
           return res.redirect('/volunteer');
         }
