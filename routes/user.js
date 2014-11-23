@@ -129,6 +129,8 @@ exports.create = function (req, res) {
 
       req.session.userid = result.rows[0].id;
       req.session.email = email;
+      req.session.balance = 25;
+      req.session.teacher = teacher;
       req.session.success = 'Registered new user: ' + email;
 
       res.redirect('/');

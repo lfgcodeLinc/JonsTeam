@@ -2,6 +2,11 @@ var pg = require('pg');
 
 exports.index = function (req, res) {
   var userid = req.session.userid;
+  if (!userid) {
+    return res.render('register.dust', {
+      error: 'Please register so you can sign up to volunteer!'
+    });
+  }
   client = new pg.Client(creds);
   var query = "SELECT *, to_char(date, 'YYYY-MM-DD') AS date FROM volunteers WHERE user_id = $1";
   client.connect();
