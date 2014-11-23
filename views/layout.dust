@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Guilford Education Alliance</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    .container {
+      padding-top: 60px;
+    }
+    </style>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Guilford Education Alliance</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+					{?user}
+          <form class="navbar-form navbar-right no-pad-right" action="/logout" method="GET">
+            <button type="submit" class="btn btn-danger btn-sm">Log out</button>&nbsp;
+          </form>
+          <span class="navbar-text navbar-right">Logged in as <strong>{user}</strong></span>
+          {:else}
+          <form class="navbar-form navbar-right no-pad" role="form" action="/login" method="POST">
+            <div class="form-group">
+              <input type="text" placeholder="Email" name="email" class="form-control">&nbsp;
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" name="pass" class="form-control">&nbsp;
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>&nbsp;
+          </form>
+					{/user}
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+      <div class="container">
+        {?success}
+        <div class="alert alert-success alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{success}
+        </div>
+        {/success}
+        {?error}
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>{error}
+        </div>
+        {/error}
+			{+content}
+			{/content}
+      </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

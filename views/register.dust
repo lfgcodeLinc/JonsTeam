@@ -1,0 +1,47 @@
+{>layout/}
+{<content}
+<div class="container pad">
+  <div class="row">
+    <h2>Register</h2>
+    <form class="form-horizontal" role="form" action="/register" method="post">
+      <div class="form-group">
+          <label class="control-label" for="name">Name</label>
+          <div class="input-group">
+              <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name" required>
+              <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="email">Email</label>
+          <div class="input-group">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+              <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="InputMessage">Password</label>
+          <div class="input-group">
+              <input type="password" name="pass" id="password" class="form-control" required></textarea>
+              <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="phone">Phone number</label>
+          <div class="input-group">
+              <input type="phone" class="form-control" id="phone" name="phone" placeholder="Enter Phone">
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="school">School</label>
+          <div class="input-group">
+            <select class="form-control" name="school">
+            {#schools}
+              <option value="{id}">{name}</option>
+            {/schools}
+            </select>
+          </div>
+      </div>
+      <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+    </form>
+  </div>
+{/content}
