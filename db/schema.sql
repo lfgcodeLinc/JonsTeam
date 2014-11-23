@@ -55,3 +55,8 @@ create table order_items (
   item_id int references items(id),
   quantity int
 );
+
+create table wishlists (
+  id serial primary key,
+  text text
+);
